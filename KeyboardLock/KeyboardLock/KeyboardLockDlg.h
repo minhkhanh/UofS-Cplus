@@ -6,6 +6,8 @@
 
 typedef void (*LockKeyboard)(HWND hWnd, BOOL b);
 typedef void (*LockCtrlAltDel)(BOOL b);
+typedef void (*LockTaskManager)(BOOL b);
+
 // CKeyboardLockDlg dialog
 class CKeyboardLockDlg : public CDialog
 {

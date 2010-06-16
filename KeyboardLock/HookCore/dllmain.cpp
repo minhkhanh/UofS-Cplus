@@ -44,7 +44,7 @@ void doSetKeyboardGlobalHook(HWND hWnd)
 	// Init value for MappedData	
 
 	if (!hKeyboardHook)
-		hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD, (HOOKPROC)KeyboardHook, hInstDLL, 0);	
+		hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardHook, hInstDLL, 0);	
 
 }
 // Remove hook
@@ -94,6 +94,39 @@ int __declspec(dllexport) LockCtrlAltDel(BOOL bEnableDisable)
 	}
 
 	return 0;
+}
+
+/****************************************
+* Disable Task Manager (CTRL+ALT+DEL). *
+* TRUE=Enable, FALSE=Disable           *
+* (Win NT/2K/XP)                       *
+****************************************/
+int __declspec(dllexport) LockTaskManager(BOOL bEnableDisable)
+{
+#define KEY_DISABLETASKMGR  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
+#define VAL_DISABLETASKMGR  "DisableTaskMgr"
+
+	HKEY    hKey;
+	DWORD   val;
+	LONG	r;
+
+	if (RegOpenKey(HKEY_CURRENT_USER, KEY_DISABLETASKMGR, &hKey) != ERROR_SUCCESS)
+		if (RegCreateKey(HKEY_CURRENT_USER, KEY_DISABLETASKMGR, &hKey) != ERROR_SUCCESS)
+			return 0;
+
+	if (!bEnableDisable) // Enable
+	{
+		r = RegDeleteValue(hKey, VAL_DISABLETASKMGR);
+	}
+	else                // Disable
+	{
+		val = 1;
+		r = RegSetValueEx(hKey, VAL_DISABLETASKMGR, 0, REG_DWORD, (BYTE *)&val, sizeof(val));
+	}
+
+	RegCloseKey(hKey);
+
+	return (r == ERROR_SUCCESS ? 1 : 0);
 }
 #ifdef _MANAGED
 #pragma managed(pop)
