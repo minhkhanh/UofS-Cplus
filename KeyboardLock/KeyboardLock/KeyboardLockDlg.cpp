@@ -166,7 +166,7 @@ void CKeyboardLockDlg::OnBnClickedOk()
 		LockKeyboard lpFunc = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
 		if (lpFunc)
 		{
-			lpFunc(m_hWnd, TRUE);
+			//lpFunc(m_hWnd, TRUE);
 		}
 		LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
 		if (lpFuncCtrlAltDel)
@@ -183,7 +183,7 @@ void CKeyboardLockDlg::OnBnClickedCancel()
 		LockKeyboard lpFunc = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
 		if (lpFunc)
 		{
-			lpFunc(m_hWnd, FALSE);
+			//lpFunc(m_hWnd, FALSE);
 		}
 		LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
 		if (lpFuncCtrlAltDel)

@@ -76,7 +76,7 @@ int __declspec(dllexport) LockCtrlAltDel(BOOL bEnableDisable)
 {
 	static BOOL bInjected = FALSE;
 
-	if (!bEnableDisable)
+	if (bEnableDisable)
 	{
 		if (!bInjected)
 		{
