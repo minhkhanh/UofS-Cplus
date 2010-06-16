@@ -4,8 +4,8 @@
 
 #pragma once
 
-typedef void (*SetGlobalHook)(HWND hWnd);
-typedef void (*RemoveGlobalHook)(HWND hWnd);
+typedef void (*LockKeyboard)(HWND hWnd, BOOL b);
+typedef void (*LockCtrlAltDel)(BOOL b);
 // CKeyboardLockDlg dialog
 class CKeyboardLockDlg : public CDialog
 {

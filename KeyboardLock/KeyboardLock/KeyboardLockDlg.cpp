@@ -163,8 +163,16 @@ void CKeyboardLockDlg::OnBnClickedOk()
 {
 	if (hHookDll)
 	{
-		SetGlobalHook lpFunc = (SetGlobalHook)GetProcAddress(hHookDll, ("doSetGlobalHook"));
-		lpFunc(m_hWnd);
+		LockKeyboard lpFunc = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
+		if (lpFunc)
+		{
+			lpFunc(m_hWnd, TRUE);
+		}
+		LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
+		if (lpFuncCtrlAltDel)
+		{
+			lpFuncCtrlAltDel(TRUE);
+		}
 	}
 }
 
@@ -172,7 +180,15 @@ void CKeyboardLockDlg::OnBnClickedCancel()
 {
 	if (hHookDll)
 	{
-		RemoveGlobalHook lpFunc = (RemoveGlobalHook)GetProcAddress(hHookDll, ("doRemoveGlobalHook"));
-		lpFunc(m_hWnd);
+		LockKeyboard lpFunc = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
+		if (lpFunc)
+		{
+			lpFunc(m_hWnd, FALSE);
+		}
+		LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
+		if (lpFuncCtrlAltDel)
+		{
+			lpFuncCtrlAltDel(FALSE);
+		}
 	}
 }

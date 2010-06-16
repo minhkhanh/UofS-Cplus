@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KeyboardLock", "KeyboardLock\KeyboardLock.vcproj", "{6345F781-D70B-42EE-8489-D8473C243A94}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HookCore", "HookCore\HookCore.vcproj", "{1888052F-2677-416E-AAC7-AC0BBBEB4154}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HookCore", "HookCore\HookCore.vcproj", "{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,10 @@ Global
 		{6345F781-D70B-42EE-8489-D8473C243A94}.Debug|Win32.Build.0 = Debug|Win32
 		{6345F781-D70B-42EE-8489-D8473C243A94}.Release|Win32.ActiveCfg = Release|Win32
 		{6345F781-D70B-42EE-8489-D8473C243A94}.Release|Win32.Build.0 = Release|Win32
-		{1888052F-2677-416E-AAC7-AC0BBBEB4154}.Debug|Win32.ActiveCfg = Debug|Win32
-		{1888052F-2677-416E-AAC7-AC0BBBEB4154}.Debug|Win32.Build.0 = Debug|Win32
-		{1888052F-2677-416E-AAC7-AC0BBBEB4154}.Release|Win32.ActiveCfg = Release|Win32
-		{1888052F-2677-416E-AAC7-AC0BBBEB4154}.Release|Win32.Build.0 = Release|Win32
+		{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}.Debug|Win32.Build.0 = Debug|Win32
+		{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}.Release|Win32.ActiveCfg = Release|Win32
+		{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

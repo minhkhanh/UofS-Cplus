@@ -1,5 +1,0 @@
-LIBRARY	"HookCore"
-EXPORTS
-   Xuly
-   doSetGlobalHook
-   doRemoveGlobalHook

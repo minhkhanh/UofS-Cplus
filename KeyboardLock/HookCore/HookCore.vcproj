@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="9.00"
 	Name="HookCore"
-	ProjectGUID="{1888052F-2677-416E-AAC7-AC0BBBEB4154}"
+	ProjectGUID="{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}"
 	RootNamespace="HookCore"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
@@ -61,7 +61,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="2"
-				ModuleDefinitionFile="KeyboardLock.def"
+				ModuleDefinitionFile="HookCore.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -93,7 +93,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			CharacterSet="1"
+			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -134,7 +134,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				LinkIncremental="1"
-				ModuleDefinitionFile="KeyboardLock.def"
+				ModuleDefinitionFile="HookCore.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -199,7 +199,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\KeyboardLock.def"
+				RelativePath=".\HookCore.def"
+				>
+			</File>
+			<File
+				RelativePath=".\Inject.cpp"
 				>
 			</File>
 			<File
@@ -229,7 +233,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\HookCore.h"
+				RelativePath=".\Inject.h"
 				>
 			</File>
 			<File
