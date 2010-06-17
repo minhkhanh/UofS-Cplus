@@ -88,14 +88,35 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_KEYBOARDLOCK_DIALOG DIALOGEX 0, 0, 320, 200
+IDD_KEYBOARDLOCK_DIALOG DIALOGEX 0, 0, 507, 229
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "KeyboardLock"
-FONT 8, "MS Shell Dlg", 0, 0, 0x1
+MENU IDR_MENU1
+FONT 10, "MS Shell Dlg", 400, 0, 0xA3
 BEGIN
-    DEFPUSHBUTTON   "Hook",IDOK,83,82,50,14
-    PUSHBUTTON      "UnHook",IDCANCEL,161,82,50,14
+    DEFPUSHBUTTON   "Hook",IDOK,72,87,43,12
+    PUSHBUTTON      "UnHook",IDCANCEL,147,87,43,12
+    GROUPBOX        "Lock mouse and keyboard",IDC_STATIC,7,7,253,101
+    LTEXT           "State:",IDC_STATIC,22,20,21,8
+    EDITTEXT        IDC_EDIT1,22,31,236,47,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Lock files",IDC_STATIC,270,7,231,101
+    LTEXT           "Choose a file:",IDC_STATIC,277,21,46,8
+    EDITTEXT        IDC_EDIT2,326,19,142,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON1,473,18,17,14
+    LTEXT           "State:",IDC_STATIC,277,34,21,8
+    EDITTEXT        IDC_EDIT3,280,46,210,33,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Lock file",IDC_BUTTON2,319,86,50,14
+    PUSHBUTTON      "Unlock file",IDC_BUTTON3,394,86,50,14
+    GROUPBOX        "Lock process",IDC_STATIC,11,109,249,111
+    LTEXT           "Choose a process:",IDC_STATIC,22,120,62,8
+    COMBOBOX        IDC_COMBO2,90,118,156,51,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "State:",IDC_STATIC,23,135,21,8
+    EDITTEXT        IDC_EDIT4,22,146,236,47,ES_AUTOHSCROLL | ES_READONLY
+    PUSHBUTTON      "Lock process",IDC_BUTTON4,77,200,50,14
+    PUSHBUTTON      "Unlock process",IDC_BUTTON5,147,200,55,14
+    PUSHBUTTON      "Exit",IDC_BUTTON7,365,172,50,14
+    PUSHBUTTON      "About",IDC_BUTTON8,364,145,50,14
 END
 
 
@@ -157,9 +178,9 @@ BEGIN
     IDD_KEYBOARDLOCK_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 313
+        RIGHTMARGIN, 501
         TOPMARGIN, 7
-        BOTTOMMARGIN, 193
+        BOTTOMMARGIN, 220
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -179,6 +200,36 @@ END
 /////////////////////////////////////////////////////////////////////////////
 
 
+/////////////////////////////////////////////////////////////////////////////
+// Vietnamese resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_VIT)
+#ifdef _WIN32
+LANGUAGE LANG_VIETNAMESE, SUBLANG_DEFAULT
+#pragma code_page(1258)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    POPUP "File"
+    BEGIN
+        MENUITEM "Exit",                        ID_FILE_EXIT
+    END
+    POPUP "Help"
+    BEGIN
+        MENUITEM "About",                       ID_HELP_ABOUT
+    END
+END
+
+#endif    // Vietnamese resources
+/////////////////////////////////////////////////////////////////////////////
+
+
 
 #ifndef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -193,7 +244,7 @@ END
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
 LANGUAGE 9, 1
 #pragma code_page(1252)
-//#include "res\KeyboardLock.rc2"  // non-Microsoft Visual C++ edited resources
+#include "res\KeyboardLock.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"     // Standard components
 #endif
 

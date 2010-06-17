@@ -65,6 +65,10 @@ BEGIN_MESSAGE_MAP(CKeyboardLockDlg, CDialog)
 	//}}AFX_MSG_MAP
 	ON_BN_CLICKED(IDCANCEL, &CKeyboardLockDlg::OnBnClickedCancel)
 	ON_BN_CLICKED(IDOK, &CKeyboardLockDlg::OnBnClickedOk)
+	ON_COMMAND(ID_HELP_ABOUT, &CKeyboardLockDlg::OnHelpAbout)
+	ON_COMMAND(ID_FILE_EXIT, &CKeyboardLockDlg::OnFileExit)
+	ON_BN_CLICKED(IDC_BUTTON8, &CKeyboardLockDlg::OnBnClickedButton8)
+	ON_BN_CLICKED(IDC_BUTTON7, &CKeyboardLockDlg::OnBnClickedButton7)
 END_MESSAGE_MAP()
 
 
@@ -211,4 +215,30 @@ void CKeyboardLockDlg::OnBnClickedCancel()
 			lpFuncLockTaskManager(FALSE);
 		}
 	}
+}
+
+void CKeyboardLockDlg::OnHelpAbout()
+{
+	// TODO: Add your command handler code here
+	CAboutDlg about;
+	about.DoModal();
+}
+
+void CKeyboardLockDlg::OnFileExit()
+{
+	// TODO: Add your command handler code here
+	EndDialog(-1);
+}
+
+void CKeyboardLockDlg::OnBnClickedButton8()
+{
+	// TODO: Add your control notification handler code here
+	CAboutDlg about;
+	about.DoModal();
+}
+
+void CKeyboardLockDlg::OnBnClickedButton7()
+{
+	// TODO: Add your control notification handler code here
+	EndDialog(-1);
 }
