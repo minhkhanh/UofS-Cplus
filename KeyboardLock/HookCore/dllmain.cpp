@@ -30,7 +30,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	return TRUE;
 }
 
-LRESULT CALLBACK KeyboardHook(int nCode,   WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK KeyboardHookProc(int nCode,   WPARAM wParam, LPARAM lParam)
 {
 	if (nCode < 0)  // do not process message 
 		return CallNextHookEx( hKeyboardHook, nCode, wParam, lParam );
@@ -44,7 +44,7 @@ void doSetKeyboardGlobalHook(HWND hWnd)
 	// Init value for MappedData	
 
 	if (!hKeyboardHook)
-		hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardHook, hInstDLL, 0);	
+		hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardHookProc, hInstDLL, 0);	
 
 }
 // Remove hook
@@ -68,8 +68,8 @@ void __declspec(dllexport) LockKeyboard(HWND hWnd, BOOL bEnableDisable)
 
 
 /*****************************************************************
-* Enable/Disable Ctrl+Alt+Del and Ctrl+Shift+Esc key sequences. *
-* TRUE=Enable, FALSE=Disable                                    *
+* Lock Ctrl+Alt+Del and Ctrl+Shift+Esc key sequences.           *
+* TRUE=Lock, FALSE=UnLock                                       *
 * (Win 2K).                                                     *
 *****************************************************************/
 int __declspec(dllexport) LockCtrlAltDel(BOOL bEnableDisable)
@@ -97,8 +97,8 @@ int __declspec(dllexport) LockCtrlAltDel(BOOL bEnableDisable)
 }
 
 /****************************************
-* Disable Task Manager (CTRL+ALT+DEL). *
-* TRUE=Enable, FALSE=Disable           *
+* Lock Task Manager (CTRL+ALT+DEL).    *
+* TRUE=Lock, FALSE=UnLock              *
 * (Win NT/2K/XP)                       *
 ****************************************/
 int __declspec(dllexport) LockTaskManager(BOOL bEnableDisable)
