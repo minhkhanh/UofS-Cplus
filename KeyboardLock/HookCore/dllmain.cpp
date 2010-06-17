@@ -9,6 +9,7 @@ HINSTANCE	 hInstDLL;
 
 #pragma data_seg("SHARED")
 HHOOK			hKeyboardHook;
+HHOOK			hMouseHook;
 #pragma data_seg()
 
 
@@ -27,7 +28,51 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	}
 	hInstDLL = (HINSTANCE) hModule;
 	hKeyboardHook = NULL;
+	hMouseHook = NULL;
 	return TRUE;
+}
+
+LRESULT CALLBACK MouseHookProc(int nCode, WORD wParam, DWORD lParam) 
+{
+	PMSLLHOOKSTRUCT p = (PMSLLHOOKSTRUCT)lParam;
+	HWND hWnd = WindowFromPoint(p->pt);
+
+	if(nCode >= 0)
+	{
+		if ((wParam == WM_LBUTTONDOWN || wParam == WM_RBUTTONDOWN) /*&& hWnd == GetDesktopWindow()*/)
+		{
+			return 1;
+		}
+	}
+
+	return CallNextHookEx(hMouseHook, nCode, wParam, lParam); 
+} 
+// Install hook
+void doSetMouseGlobalHook(HWND hWnd)
+{
+	// Init value for MappedData	
+
+	if (!hMouseHook)
+		hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, (HOOKPROC)MouseHookProc, hInstDLL, 0);	
+
+}
+// Remove hook
+void doRemoveMouseGlobalHook(HWND hWnd)
+{
+	if (hMouseHook)
+		UnhookWindowsHookEx(hMouseHook);
+}
+
+void __declspec(dllexport) LockMouse(HWND hWnd, BOOL bEnableDisable)
+{
+	if (!bEnableDisable)
+	{
+		doRemoveMouseGlobalHook(hWnd);
+	}
+	else
+	{
+		doSetMouseGlobalHook(hWnd);
+	}
 }
 
 LRESULT CALLBACK KeyboardHookProc(int nCode,   WPARAM wParam, LPARAM lParam)

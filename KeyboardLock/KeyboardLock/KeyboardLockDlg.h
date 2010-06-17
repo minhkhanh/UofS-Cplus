@@ -5,6 +5,7 @@
 #pragma once
 
 typedef void (*LockKeyboard)(HWND hWnd, BOOL b);
+typedef void (*LockMouse)(HWND hWnd, BOOL b);
 typedef void (*LockCtrlAltDel)(BOOL b);
 typedef void (*LockTaskManager)(BOOL b);
 

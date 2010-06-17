@@ -3,3 +3,4 @@ EXPORTS
    LockKeyboard
    LockCtrlAltDel
    LockTaskManager
+   LockMouse

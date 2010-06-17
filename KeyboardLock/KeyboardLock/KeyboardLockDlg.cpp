@@ -112,7 +112,7 @@ void CKeyboardLockDlg::OnSysCommand(UINT nID, LPARAM lParam)
 		CAboutDlg dlgAbout;
 		dlgAbout.DoModal();
 	}
-	else if (nID & SC_CLOSE)
+	else if ((nID & 0xFFF0)  == SC_CLOSE)
 	{
 		this->DestroyWindow();
 	}
@@ -163,16 +163,21 @@ void CKeyboardLockDlg::OnBnClickedOk()
 {
 	if (hHookDll)
 	{
-		LockKeyboard lpFunc = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
-		if (lpFunc)
+		LockKeyboard lpFuncLockKeyboard = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
+		if (lpFuncLockKeyboard)
 		{
-			lpFunc(m_hWnd, TRUE);
+			//lpFuncLockKeyboard(m_hWnd, TRUE);
 		}
-		LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
-		if (lpFuncCtrlAltDel)
+		LockMouse lpFuncLockMouse = (LockMouse)GetProcAddress(hHookDll, ("LockMouse"));
+		if (lpFuncLockMouse)
 		{
-			lpFuncCtrlAltDel(TRUE);
+			lpFuncLockMouse(m_hWnd, TRUE);
 		}
+		//LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
+		//if (lpFuncCtrlAltDel)
+		//{
+		//	lpFuncCtrlAltDel(TRUE);
+		//}
 		LockTaskManager lpFuncLockTaskManager = (LockTaskManager)GetProcAddress(hHookDll, ("LockTaskManager"));
 		if (lpFuncLockTaskManager)
 		{
@@ -188,13 +193,18 @@ void CKeyboardLockDlg::OnBnClickedCancel()
 		LockKeyboard lpFunc = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
 		if (lpFunc)
 		{
-			lpFunc(m_hWnd, FALSE);
+			//lpFunc(m_hWnd, FALSE);
 		}
-		LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
-		if (lpFuncCtrlAltDel)
+		LockMouse lpFuncLockMouse = (LockMouse)GetProcAddress(hHookDll, ("LockMouse"));
+		if (lpFuncLockMouse)
 		{
-			lpFuncCtrlAltDel(FALSE);
+			lpFuncLockMouse(m_hWnd, FALSE);
 		}
+		//LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
+		//if (lpFuncCtrlAltDel)
+		//{
+		//	lpFuncCtrlAltDel(FALSE);
+		//}
 		LockTaskManager lpFuncLockTaskManager = (LockTaskManager)GetProcAddress(hHookDll, ("LockTaskManager"));
 		if (lpFuncLockTaskManager)
 		{
