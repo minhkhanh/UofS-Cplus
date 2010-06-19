@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KeyboardLock", "KeyboardLoc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HookCore", "HookCore\HookCore.vcproj", "{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ProcessCore", "ProcessCore\ProcessCore.vcproj", "{5A36E0F6-07A9-43EB-8B3A-4E6774802338}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}.Debug|Win32.Build.0 = Debug|Win32
 		{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}.Release|Win32.ActiveCfg = Release|Win32
 		{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}.Release|Win32.Build.0 = Release|Win32
+		{5A36E0F6-07A9-43EB-8B3A-4E6774802338}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5A36E0F6-07A9-43EB-8B3A-4E6774802338}.Debug|Win32.Build.0 = Debug|Win32
+		{5A36E0F6-07A9-43EB-8B3A-4E6774802338}.Release|Win32.ActiveCfg = Release|Win32
+		{5A36E0F6-07A9-43EB-8B3A-4E6774802338}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
