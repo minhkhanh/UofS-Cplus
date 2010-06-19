@@ -178,6 +178,10 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{07DEA04B-00C6-4EEE-A23F-BDCF8C71DC4A}"
+			RelativePathToProject=".\HookCore\HookCore.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter
@@ -219,6 +223,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\dllLink.h"
+				>
+			</File>
 			<File
 				RelativePath=".\KeyboardLock.h"
 				>

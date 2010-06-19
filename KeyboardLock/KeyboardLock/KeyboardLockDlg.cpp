@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "KeyboardLock.h"
 #include "KeyboardLockDlg.h"
+#include "dllLink.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -165,56 +166,16 @@ HCURSOR CKeyboardLockDlg::OnQueryDragIcon()
 
 void CKeyboardLockDlg::OnBnClickedOk()
 {
-	if (hHookDll)
-	{
-		LockKeyboard lpFuncLockKeyboard = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
-		if (lpFuncLockKeyboard)
-		{
-			//lpFuncLockKeyboard(m_hWnd, TRUE);
-		}
-		LockMouse lpFuncLockMouse = (LockMouse)GetProcAddress(hHookDll, ("LockMouse"));
-		if (lpFuncLockMouse)
-		{
-			lpFuncLockMouse(m_hWnd, TRUE);
-		}
-		//LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
-		//if (lpFuncCtrlAltDel)
-		//{
-		//	lpFuncCtrlAltDel(TRUE);
-		//}
-		LockTaskManager lpFuncLockTaskManager = (LockTaskManager)GetProcAddress(hHookDll, ("LockTaskManager"));
-		if (lpFuncLockTaskManager)
-		{
-			lpFuncLockTaskManager(TRUE);
-		}
-	}
+	//LockKeyboard(m_hWnd, TRUE);
+	LockMouse(m_hWnd, TRUE);
+	LockTaskManager(TRUE);
 }
 
 void CKeyboardLockDlg::OnBnClickedCancel()
 {
-	if (hHookDll)
-	{
-		LockKeyboard lpFunc = (LockKeyboard)GetProcAddress(hHookDll, ("LockKeyboard"));
-		if (lpFunc)
-		{
-			//lpFunc(m_hWnd, FALSE);
-		}
-		LockMouse lpFuncLockMouse = (LockMouse)GetProcAddress(hHookDll, ("LockMouse"));
-		if (lpFuncLockMouse)
-		{
-			lpFuncLockMouse(m_hWnd, FALSE);
-		}
-		//LockCtrlAltDel lpFuncCtrlAltDel = (LockCtrlAltDel)GetProcAddress(hHookDll, ("LockCtrlAltDel"));
-		//if (lpFuncCtrlAltDel)
-		//{
-		//	lpFuncCtrlAltDel(FALSE);
-		//}
-		LockTaskManager lpFuncLockTaskManager = (LockTaskManager)GetProcAddress(hHookDll, ("LockTaskManager"));
-		if (lpFuncLockTaskManager)
-		{
-			lpFuncLockTaskManager(FALSE);
-		}
-	}
+	//LockKeyboard(m_hWnd, FALSE);
+	LockMouse(m_hWnd, FALSE);
+	LockTaskManager(FALSE);
 }
 
 void CKeyboardLockDlg::OnHelpAbout()
