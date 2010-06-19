@@ -1,0 +1,2 @@
+﻿calc.exe
+notepad.exe

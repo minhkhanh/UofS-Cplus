@@ -105,7 +105,7 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
-	hHookDll = LoadLibrary(_T("HookCore.dll"));
+	//hHookDll = LoadLibrary(_T("HookCore.dll"));
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -167,15 +167,17 @@ HCURSOR CKeyboardLockDlg::OnQueryDragIcon()
 void CKeyboardLockDlg::OnBnClickedOk()
 {
 	//LockKeyboard(m_hWnd, TRUE);
-	LockMouse(m_hWnd, TRUE);
-	LockTaskManager(TRUE);
+	//LockMouse(m_hWnd, TRUE);
+	//LockTaskManager(TRUE);
+	MonitorProcess(TRUE);
 }
 
 void CKeyboardLockDlg::OnBnClickedCancel()
 {
 	//LockKeyboard(m_hWnd, FALSE);
-	LockMouse(m_hWnd, FALSE);
-	LockTaskManager(FALSE);
+	//LockMouse(m_hWnd, FALSE);
+	//LockTaskManager(FALSE);
+	MonitorProcess(FALSE);
 }
 
 void CKeyboardLockDlg::OnHelpAbout()
