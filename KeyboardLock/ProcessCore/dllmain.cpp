@@ -136,12 +136,12 @@ bool FindPIdInList(DWORD dwPID, vector<PROCESSINFO> &vList)
 	}
 	return false;
 }
-void GetListDenyFromFile(wchar_t* pszPath, vector<wchar_t*> &vList)
+void EXPORT GetListDenyFromFile(wchar_t* pszPath, vector<wchar_t*> &vList)
 {
 	vList.clear();
 	FILE * f;
 	if ((f = _wfopen(pszPath, _T("rt"))) == NULL)
-		return;
+		return; 
 	char pTemp[INPUT_MAX_LEN];
 	int indexCell = 0;
 	while (fgets(pTemp, INPUT_MAX_LEN, f))
@@ -187,4 +187,71 @@ wchar_t * UTF8_to_WChar(const char *string)
 		b++;
 	}
 	return res;
+}
+
+void EXPORT MiliSecsToSystemTime(DWORD dwMiliSecs, SYSTEMTIME *stResult)
+{
+	//stResult->wDay = dwMiliSecs / 86400000;
+	//dwMiliSecs = dwMiliSecs % 86400000;
+
+	stResult->wHour = dwMiliSecs / 3600000;
+	dwMiliSecs = dwMiliSecs % 3600000;
+
+	stResult->wMinute = dwMiliSecs / 60000;
+	dwMiliSecs = dwMiliSecs % 60000;
+
+	stResult->wSecond = dwMiliSecs / 1000;
+	dwMiliSecs = dwMiliSecs % 1000;
+
+	stResult->wMilliseconds = dwMiliSecs;
+}
+
+DWORD EXPORT GetFileTimeDifference(FILETIME* pFileTimeMin, FILETIME* pFileTimeMax)
+{
+	LONGLONG llCreate = *(LONGLONG *)pFileTimeMin;
+	LONGLONG llExit = *(LONGLONG *)pFileTimeMax;
+
+	DWORD dwCreate, dwExit;
+
+	dwCreate = (DWORD)(llCreate / 10000);
+	dwExit = (DWORD)(llExit / 10000);
+
+	return dwExit - dwCreate;
+}
+
+BOOL EXPORT GetDateString( LPFILETIME pFt, TCHAR * pszDate, unsigned cbIn)
+{
+	FILETIME ftLocal;
+	SYSTEMTIME st;
+
+	if(!FileTimeToLocalFileTime(pFt, &ftLocal))
+		return FALSE;
+
+	if(!FileTimeToSystemTime(&ftLocal, &st))
+		return FALSE;
+
+	TCHAR szTemp[12];
+
+	wsprintf(szTemp, L"%02u/%02u/%04u",	st.wMonth, st.wDay, st.wYear);
+	lstrcpyn(pszDate, szTemp, cbIn); 
+	return TRUE;
+}
+
+BOOL EXPORT GetTimeString( LPFILETIME pFt, TCHAR * pszTime, unsigned cbIn)
+{
+	FILETIME ftLocal;
+	SYSTEMTIME st;
+
+	if(!FileTimeToLocalFileTime( pFt, &ftLocal))
+		return FALSE;
+
+	if(!FileTimeToSystemTime( &ftLocal, &st))
+		return FALSE;
+
+	TCHAR szTemp[12];
+
+	wsprintf(szTemp, L"%02u:%02u:%02u", st.wHour, st.wMinute, st.wSecond);
+	lstrcpyn(pszTime, szTemp, cbIn); 
+
+	return TRUE;
 }

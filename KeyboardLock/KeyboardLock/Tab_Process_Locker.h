@@ -36,4 +36,8 @@ private:
 	CListCtrl m_lvDenied;
 public:
 	afx_msg void OnBnClickedButtonRemove();
+private:
+	void UpdateListView(void);
+	void LoadListView();
+	void SaveListView(void);
 };
