@@ -111,6 +111,10 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 	//hHookDll = LoadLibrary(_T("HookCore.dll"));
+	TCHAR szEXEPath[MAX_PATH];
+	_wgetcwd(szEXEPath, MAX_PATH);
+	wcscat(szEXEPath,L"\\report.text\n");
+	SetCurrentPath(szEXEPath);
 
 	//Add them the Tab
 	i_NumberOfTab = 3;

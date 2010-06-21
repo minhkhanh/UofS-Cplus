@@ -49,4 +49,5 @@ private:
 	void StatusUnMonitor();
 public:
 	afx_msg void OnBnClickedLogkeyboard();
+	afx_msg void OnBnClickedViewlog();
 };
