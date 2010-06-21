@@ -221,6 +221,14 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\Tab_Process_Locker.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Tab_Process_Tracker.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -248,6 +256,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Tab_Process_Locker.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Tab_Process_Tracker.h"
+				>
+			</File>
+			<File
 				RelativePath=".\targetver.h"
 				>
 			</File>
@@ -268,6 +284,16 @@
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\Tab_Process_Tracker.htm"
+			DeploymentContent="true"
+			>
+		</File>
+		<File
+			RelativePath=".\Tab_X.htm"
+			DeploymentContent="true"
 			>
 		</File>
 	</Files>

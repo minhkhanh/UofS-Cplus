@@ -9,6 +9,9 @@
 #endif
 
 #include "resource.h"		// main symbols
+#include "dllLink.h"
+#include <fstream>
+using namespace std;
 
 
 // CKeyboardLockApp:

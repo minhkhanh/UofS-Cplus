@@ -6,6 +6,10 @@
 #define IDD_ABOUTBOX                    100
 #define IDS_ABOUTBOX                    101
 #define IDD_KEYBOARDLOCK_DIALOG         102
+#define IDD_TAB_PROCESS_LOCKER          103
+#define IDR_HTML_TAB_X                  104
+#define IDD_TAB_PROCESS_TRACKER         104
+#define IDR_HTML_TAB_PROCESS_TRACKER    105
 #define IDR_MAINFRAME                   128
 #define IDR_MENU1                       129
 #define IDC_EDIT1                       1000
@@ -21,6 +25,12 @@
 #define IDC_BUTTON6                     1010
 #define IDC_BUTTON7                     1011
 #define IDC_BUTTON8                     1012
+#define IDB_MONITER                     1012
+#define IDB_UNMONITER                   1013
+#define IDB_ADD2LIST                    1014
+#define IDC_LIST1                       1015
+#define IDB_MONITOR                     1016
+#define IDC_TAB1                        1017
 #define ID_FILE_EXIT                    32771
 #define ID_HELP_ABOUT                   32772
 
@@ -28,9 +38,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        130
+#define _APS_NEXT_RESOURCE_VALUE        131
 #define _APS_NEXT_COMMAND_VALUE         32773
-#define _APS_NEXT_CONTROL_VALUE         1012
-#define _APS_NEXT_SYMED_VALUE           101
+#define _APS_NEXT_CONTROL_VALUE         1018
+#define _APS_NEXT_SYMED_VALUE           106
 #endif
 #endif

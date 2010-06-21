@@ -88,35 +88,32 @@ BEGIN
     DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
 END
 
-IDD_KEYBOARDLOCK_DIALOG DIALOGEX 0, 0, 507, 229
+IDD_KEYBOARDLOCK_DIALOG DIALOGEX 0, 0, 335, 169
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "KeyboardLock"
 MENU IDR_MENU1
 FONT 10, "MS Shell Dlg", 400, 0, 0xA3
 BEGIN
-    DEFPUSHBUTTON   "Hook",IDOK,72,87,43,12
-    PUSHBUTTON      "UnHook",IDCANCEL,147,87,43,12
-    GROUPBOX        "Lock mouse and keyboard",IDC_STATIC,7,7,253,101
-    LTEXT           "State:",IDC_STATIC,22,20,21,8
-    EDITTEXT        IDC_EDIT1,22,31,236,47,ES_AUTOHSCROLL | ES_READONLY
-    GROUPBOX        "Lock files",IDC_STATIC,270,7,231,101
-    LTEXT           "Choose a file:",IDC_STATIC,277,21,46,8
-    EDITTEXT        IDC_EDIT2,326,19,142,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "...",IDC_BUTTON1,473,18,17,14
-    LTEXT           "State:",IDC_STATIC,277,34,21,8
-    EDITTEXT        IDC_EDIT3,280,46,210,33,ES_AUTOHSCROLL | ES_READONLY
-    PUSHBUTTON      "Lock file",IDC_BUTTON2,319,86,50,14
-    PUSHBUTTON      "Unlock file",IDC_BUTTON3,394,86,50,14
-    GROUPBOX        "Lock process",IDC_STATIC,11,109,249,111
-    LTEXT           "Choose a process:",IDC_STATIC,22,120,62,8
-    COMBOBOX        IDC_COMBO2,90,118,156,51,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "State:",IDC_STATIC,23,135,21,8
-    EDITTEXT        IDC_EDIT4,22,146,236,47,ES_AUTOHSCROLL | ES_READONLY
-    PUSHBUTTON      "Lock process",IDC_BUTTON4,77,200,50,14
-    PUSHBUTTON      "Unlock process",IDC_BUTTON5,147,200,55,14
-    PUSHBUTTON      "Exit",IDC_BUTTON7,365,172,50,14
-    PUSHBUTTON      "About",IDC_BUTTON8,364,145,50,14
+    CONTROL         "",IDC_TAB1,"SysTabControl32",0x0,7,7,322,153
+END
+
+IDD_TAB_PROCESS_LOCKER DIALOGEX 0, 0, 341, 146
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "Monitor",IDB_MONITER,84,114,50,18
+    PUSHBUTTON      "UnMoniter",IDB_UNMONITER,168,114,48,18
+    PUSHBUTTON      "Add ...",IDB_ADD2LIST,12,12,54,18
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,78,12,240,90
+    PUSHBUTTON      "Remove",IDC_BUTTON1,12,42,54,18
+END
+
+IDD_TAB_PROCESS_TRACKER DIALOGEX 0, 0, 330, 146
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Monitor",IDB_MONITOR,114,96,50,18
 END
 
 
@@ -142,7 +139,7 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "TODO: <Company name>"
+            VALUE "CompanyName", "XMK Coop."
             VALUE "FileDescription", "TODO: <File description>"
             VALUE "FileVersion", "1.0.0.1"
             VALUE "InternalName", "KeyboardLock.exe"
@@ -178,13 +175,35 @@ BEGIN
     IDD_KEYBOARDLOCK_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 501
+        RIGHTMARGIN, 329
         TOPMARGIN, 7
-        BOTTOMMARGIN, 220
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_TAB_PROCESS_LOCKER, DIALOG
+    BEGIN
+        RIGHTMARGIN, 335
+        BOTTOMMARGIN, 140
+    END
+
+    IDD_TAB_PROCESS_TRACKER, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 323
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 139
     END
 END
 #endif    // APSTUDIO_INVOKED
 
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// HTML
+//
+
+IDR_HTML_TAB_X          HTML                    "Tab_X.htm"
+IDR_HTML_TAB_PROCESS_TRACKER HTML                    "Tab_Process_Tracker.htm"
 
 /////////////////////////////////////////////////////////////////////////////
 //
