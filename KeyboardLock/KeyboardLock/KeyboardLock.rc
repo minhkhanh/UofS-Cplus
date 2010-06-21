@@ -126,12 +126,13 @@ BEGIN
 END
 
 IDD_DIALOGBAR DIALOGEX 0, 0, 300, 140
-STYLE DS_SETFONT | WS_CHILD
-FONT 9, "Microsoft Sans Serif", 400, 0, 0xA3
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD
+FONT 8, "MS Shell Dlg", 400, 0, 0x0
 BEGIN
-    PUSHBUTTON      "Log in",IDC_BUTTON1,77,105,50,14
+    PUSHBUTTON      "Log in",IDC_BUTTON1,77,108,50,18
+    PUSHBUTTON      "Log out",IDC_BUTTON2,174,108,50,18
     EDITTEXT        IDC_EDIT1,73,50,152,15,ES_PASSWORD | ES_AUTOHSCROLL
-    PUSHBUTTON      "Log out",IDC_BUTTON2,172,104,50,14
+    PUSHBUTTON      "Set New Password",IDC_BUTTON3,120,72,66,18,NOT WS_VISIBLE
 END
 
 
@@ -158,12 +159,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "XMK Coop."
-            VALUE "FileDescription", "TODO: <File description>"
+            VALUE "FileDescription", "Security Guard"
             VALUE "FileVersion", "1.0.0.1"
-            VALUE "InternalName", "KeyboardLock.exe"
-            VALUE "LegalCopyright", "TODO: (c) <Company name>.  All rights reserved."
-            VALUE "OriginalFilename", "KeyboardLock.exe"
-            VALUE "ProductName", "TODO: <Product name>"
+            VALUE "InternalName", "Security Guard"
+            VALUE "LegalCopyright", "Security Guard (c) <XMK>.  All rights reserved."
+            VALUE "OriginalFilename", "Security Guard"
+            VALUE "ProductName", "Security Guard"
             VALUE "ProductVersion", "1.0.0.1"
         END
     END

@@ -16,6 +16,7 @@ public:
 	enum { IDD = IDD_DIALOGBAR };
 
 protected:
+	//virtual BOOL OnInitDialog();
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
 	DECLARE_MESSAGE_MAP()
@@ -25,4 +26,8 @@ public:
 public:
 	CString PassAccess;
 	afx_msg void OnBnClickedButton2();
+private:
+	CButton m_btnSetNewPass;
+public:
+	afx_msg void OnBnClickedButton3();
 };
