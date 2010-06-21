@@ -124,6 +124,14 @@ BEGIN
     PUSHBUTTON      "Save ...",IDC_BUTTON1,226,138,50,18
 END
 
+IDD_DIALOGBAR DIALOGEX 0, 0, 358, 154
+STYLE DS_SETFONT | WS_CHILD
+FONT 9, "Microsoft Sans Serif", 400, 0, 0xA3
+BEGIN
+    PUSHBUTTON      "Log in",IDC_BUTTON1,157,120,50,14
+    EDITTEXT        IDC_EDIT1,104,64,152,15,ES_AUTOHSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -200,6 +208,14 @@ BEGIN
         RIGHTMARGIN, 354
         TOPMARGIN, 7
         BOTTOMMARGIN, 165
+    END
+
+    IDD_DIALOGBAR, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 351
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 147
     END
 END
 #endif    // APSTUDIO_INVOKED

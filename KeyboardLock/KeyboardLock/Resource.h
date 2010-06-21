@@ -10,6 +10,7 @@
 #define IDR_HTML_TAB_X                  104
 #define IDD_TAB_PROCESS_TRACKER         104
 #define IDR_HTML_TAB_PROCESS_TRACKER    105
+#define IDD_DIALOGBAR                   105
 #define IDR_MAINFRAME                   128
 #define IDR_MENU1                       129
 #define IDC_EDIT1                       1000

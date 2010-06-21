@@ -8,6 +8,7 @@
 #include "dllLink.h"
 #include "Tab_Process_Locker.h"
 #include "Tab_Process_Tracker.h"
+#include "Tab_LogIn.h";
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -49,11 +50,12 @@ END_MESSAGE_MAP()
 
 
 
-
+bool CKeyboardLockDlg::isRightPass = false;
 CKeyboardLockDlg::CKeyboardLockDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(CKeyboardLockDlg::IDD, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	//isRightPass = false;
 }
 
 void CKeyboardLockDlg::DoDataExchange(CDataExchange* pDX)
@@ -110,26 +112,33 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 	//hHookDll = LoadLibrary(_T("HookCore.dll"));
 
 	//Add them the Tab
-	i_NumberOfTab = 2;
-	tab[0] = new CTab_Process_Locker;
-	tab[1] = new CTab_Process_Tracker;
+	i_NumberOfTab = 3;
+	tab[0] = new Tab_LogIn;
+	tab[1] = new CTab_Process_Locker;
+	tab[2] = new CTab_Process_Tracker;
 
-	tab[0]->Create(IDD_TAB_PROCESS_LOCKER, GetParent());
-	tab[1]->Create(IDD_TAB_PROCESS_TRACKER, GetParent());
+	tab[0]->Create(IDD_DIALOGBAR);
+	tab[1]->Create(IDD_TAB_PROCESS_LOCKER, GetParent());
+	tab[2]->Create(IDD_TAB_PROCESS_TRACKER, GetParent());
 
 	TCITEM tie;
 	tie.mask = TCIF_TEXT;
-	tie.pszText = L"Process Locker";
+	tie.pszText = L"Log in";
 	MyTabControl.InsertItem(0, &tie);
 
 	tie.mask = TCIF_TEXT;
-	tie.pszText = L"Tracker";
+	tie.pszText = L"Process Locker";
 	MyTabControl.InsertItem(1, &tie);
+
+	tie.mask = TCIF_TEXT;
+	tie.pszText = L"Tracker";
+	MyTabControl.InsertItem(2, &tie);
 
 	//Xu li giao dien tung Tab
 	CRect l_RectClient;
 	CRect l_RectWnd;
 
+	MyTabControl.SetCurSel(0);
 	int nSel = MyTabControl.GetCurSel();
 
 	MyTabControl.GetClientRect(l_RectClient);
@@ -140,8 +149,13 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 
 	for (int i=0; i<i_NumberOfTab; i++)
 		tab[i]->SetWindowPos(&wndTop, l_RectClient.left, l_RectClient.top, l_RectClient.Width(), l_RectClient.Height(), SWP_HIDEWINDOW);
-
+	
 	tab[nSel]->ShowWindow(SW_SHOW);
+
+	//if (isRightPass == true)
+	//	tab[nSel]->ShowWindow(SW_SHOW);
+	//else
+	//	tab[nSel]->ShowWindow(SW_HIDE);
 
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
@@ -230,6 +244,8 @@ void CKeyboardLockDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	// TODO: Add your control notification handler code here
 	*pResult = 0;
 
+	//MyTabControl.SetCurSel (0);
+
 	//Xu li giao dien tung Tab
 	CRect l_RectClient;
 	CRect l_RectWnd;
@@ -245,5 +261,13 @@ void CKeyboardLockDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	for (int i=0; i<i_NumberOfTab; i++)
 		tab[i]->SetWindowPos(&wndTop, l_RectClient.left, l_RectClient.top, l_RectClient.Width(), l_RectClient.Height(), SWP_HIDEWINDOW);
 
-	tab[nSel]->ShowWindow(SW_SHOW);
+	//tab[nSel]->ShowWindow(SW_SHOW);
+	if (isRightPass == true)
+		tab[nSel]->ShowWindow(SW_SHOW);
+	else
+		tab[nSel]->ShowWindow(SW_HIDE);
+
+	if (nSel == 0)
+		tab[0]->ShowWindow(SW_SHOW);
+
 }

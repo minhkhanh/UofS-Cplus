@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="KeyboardLock"
 	ProjectGUID="{6345F781-D70B-42EE-8489-D8473C243A94}"
 	RootNamespace="KeyboardLock"
@@ -224,6 +224,10 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\Tab_LogIn.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Tab_Process_Locker.cpp"
 				>
 			</File>
@@ -255,6 +259,10 @@
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Tab_LogIn.h"
 				>
 			</File>
 			<File

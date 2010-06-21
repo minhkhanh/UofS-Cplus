@@ -21,6 +21,7 @@ public:
 	enum { IDD = IDD_KEYBOARDLOCK_DIALOG };
 	CDialog *tab[4];
 	int i_NumberOfTab;
+	static bool isRightPass;
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
