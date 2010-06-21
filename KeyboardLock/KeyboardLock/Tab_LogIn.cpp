@@ -44,5 +44,10 @@ void Tab_LogIn::OnBnClickedButton1()
 	if (temp == "anhkhoa")
 	{
 		CKeyboardLockDlg::isRightPass = true;
+		MessageBox(L"Access successfully!", L"Notice", MB_OK);
 	}
+	else
+		MessageBox(L"Access denied!", L"Notice", MB_OK);
+
+	EditBox_Pass.SetWindowTextW(L"");
 }
