@@ -3,3 +3,4 @@ EXPORTS
    LockKeyboard
    LockTaskManager
    LockMouse
+   ViewLogKeyLogger

@@ -12,5 +12,6 @@
 #include <windows.h>
 
 #define EXPORT __declspec(dllexport)
+#define IMPORT __declspec(dllimport)
 
 // TODO: reference additional headers your program requires here

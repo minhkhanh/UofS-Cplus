@@ -66,7 +66,6 @@ DWORD CALLBACK DenyProcessThread(void *lpVoid)
 				}
 			}
 		}
-		Beep(750,300);
 		Sleep(500);
 	}
 	for (int i=0; i<vFileExeList.size(); ++i)
@@ -138,19 +137,25 @@ bool FindPIdInList(DWORD dwPID, vector<PROCESSINFO> &vList)
 }
 void EXPORT GetListDenyFromFile(wchar_t* pszPath, vector<wchar_t*> &vList)
 {
-	vList.clear();
-	FILE * f;
-	if ((f = _wfopen(pszPath, _T("rt"))) == NULL)
-		return; 
-	char pTemp[INPUT_MAX_LEN];
-	int indexCell = 0;
-	while (fgets(pTemp, INPUT_MAX_LEN, f))
-	{
-		wchar_t * temp = UTF8_to_WChar(pTemp);
-		temp[wcslen(temp)-1] = temp[wcslen(temp)];   // bo ky tu xuong dong 
-		vList.push_back(temp);
-	}
-	fclose(f);
+	ReadFileByLine(pszPath, vList);
+	//vList.clear();
+	//FILE * f;
+	//if ((f = _wfopen(pszPath, _T("rt"))) == NULL)
+	//	return;
+	//char pTemp[INPUT_MAX_LEN];
+	//int indexCell = 0;
+	//while (fgets(pTemp, INPUT_MAX_LEN, f))
+	//{
+	//	wchar_t * temp = UTF8_to_WChar(pTemp);
+	//	temp[wcslen(temp)-1] = temp[wcslen(temp)];   // bo ky tu xuong dong 
+	//	vList.push_back(temp);
+	//}
+	//fclose(f);
+}
+
+void EXPORT SaveListDenyToFile(wchar_t* pszPath, vector<wchar_t*> &vList)
+{
+	WriteNewFileByLine(pszPath, vList);
 }
 
 wchar_t * UTF8_to_WChar(const char *string)

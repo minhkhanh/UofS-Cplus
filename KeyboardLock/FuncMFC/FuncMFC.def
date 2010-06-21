@@ -1,0 +1,4 @@
+LIBRARY      "FuncMFC"
+EXPORTS
+	WriteNewFileByLine
+	ReadFileByLine

