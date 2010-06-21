@@ -33,8 +33,9 @@ public:
 private:
 	CButton m_btnMonitor;
 	BOOL m_bIsMonitored;
-	//CListCtrl m_lvTracked;
+	HANDLE m_hThread;
 	CListCtrl m_lvTracked;
+	CButton m_btnSave;
 
 	struct _PROCESS_LVITEM
 	{
@@ -57,13 +58,14 @@ private:
 		}
 	};
 
-public:
-	afx_msg void OnBnClickedMonitor();
-private:
+	void ClearLVData(void);
 	void UpdateProcessList(void);
 	void AddProcessToList(DWORD dwProcID);
 	void UpdateProcessTime(void);
+
 public:
-	afx_msg void OnBnClickedButtonSave();
+	afx_msg void OnBnClickedMonitor();
+	afx_msg void OnBnClickedSave();
 	static DWORD WINAPI RunThread(void* lpVoid);
+	afx_msg void OnDestroy();
 };
