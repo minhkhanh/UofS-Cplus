@@ -22,4 +22,7 @@ protected:
 public:
 	CEdit EditBox_Pass;
 	afx_msg void OnBnClickedButton1();
+public:
+	CString PassAccess;
+	afx_msg void OnBnClickedButton2();
 };

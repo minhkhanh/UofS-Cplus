@@ -135,28 +135,10 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 	MyTabControl.InsertItem(2, &tie);
 
 	//Xu li giao dien tung Tab
-	CRect l_RectClient;
-	CRect l_RectWnd;
-
 	MyTabControl.SetCurSel(0);
 	int nSel = MyTabControl.GetCurSel();
 
-	MyTabControl.GetClientRect(l_RectClient);
-	MyTabControl.AdjustRect(FALSE, l_RectClient);
-	MyTabControl.GetWindowRect(l_RectWnd);
-	ScreenToClient(l_RectWnd);
-	l_RectClient.OffsetRect(l_RectWnd.left, l_RectWnd.top);
-
-	for (int i=0; i<i_NumberOfTab; i++)
-		tab[i]->SetWindowPos(&wndTop, l_RectClient.left, l_RectClient.top, l_RectClient.Width(), l_RectClient.Height(), SWP_HIDEWINDOW);
-	
-	tab[nSel]->ShowWindow(SW_SHOW);
-
-	//if (isRightPass == true)
-	//	tab[nSel]->ShowWindow(SW_SHOW);
-	//else
-	//	tab[nSel]->ShowWindow(SW_HIDE);
-
+	EnableTab(nSel, TRUE);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -244,13 +226,23 @@ void CKeyboardLockDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	// TODO: Add your control notification handler code here
 	*pResult = 0;
 
-	//MyTabControl.SetCurSel (0);
-
 	//Xu li giao dien tung Tab
+	int nSel = MyTabControl.GetCurSel();
+
+	if (isRightPass == true)
+		EnableTab(nSel, TRUE);
+	else
+		EnableTab(nSel, FALSE);
+
+
+	if (nSel == 0)
+		EnableTab(0, TRUE);
+}
+
+void CKeyboardLockDlg::EnableTab(int nSel, bool isEnable)
+{
 	CRect l_RectClient;
 	CRect l_RectWnd;
-
-	int nSel = MyTabControl.GetCurSel();
 
 	MyTabControl.GetClientRect(l_RectClient);
 	MyTabControl.AdjustRect(FALSE, l_RectClient);
@@ -261,13 +253,9 @@ void CKeyboardLockDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	for (int i=0; i<i_NumberOfTab; i++)
 		tab[i]->SetWindowPos(&wndTop, l_RectClient.left, l_RectClient.top, l_RectClient.Width(), l_RectClient.Height(), SWP_HIDEWINDOW);
 
-	//tab[nSel]->ShowWindow(SW_SHOW);
-	if (isRightPass == true)
+	if (isEnable == true)
 		tab[nSel]->ShowWindow(SW_SHOW);
 	else
 		tab[nSel]->ShowWindow(SW_HIDE);
-
-	if (nSel == 0)
-		tab[0]->ShowWindow(SW_SHOW);
 
 }

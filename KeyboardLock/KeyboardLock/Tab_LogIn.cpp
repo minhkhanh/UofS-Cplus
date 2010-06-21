@@ -14,7 +14,7 @@ IMPLEMENT_DYNAMIC(Tab_LogIn, CDialog)
 Tab_LogIn::Tab_LogIn(CWnd* pParent /*=NULL*/)
 	: CDialog(Tab_LogIn::IDD, pParent)
 {
-
+	PassAccess = L"anhkhoa";
 }
 
 Tab_LogIn::~Tab_LogIn()
@@ -30,6 +30,7 @@ void Tab_LogIn::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(Tab_LogIn, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON1, &Tab_LogIn::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON2, &Tab_LogIn::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -41,7 +42,7 @@ void Tab_LogIn::OnBnClickedButton1()
 	CString temp;
 	EditBox_Pass.GetWindowTextW(temp);
 	
-	if (temp == "anhkhoa")
+	if (temp == PassAccess)
 	{
 		CKeyboardLockDlg::isRightPass = true;
 		MessageBox(L"Access successfully!", L"Notice", MB_OK);
@@ -50,4 +51,14 @@ void Tab_LogIn::OnBnClickedButton1()
 		MessageBox(L"Access denied!", L"Notice", MB_OK);
 
 	EditBox_Pass.SetWindowTextW(L"");
+}
+
+void Tab_LogIn::OnBnClickedButton2()
+{
+	// TODO: Add your control notification handler code here
+	if (CKeyboardLockDlg::isRightPass == true)
+	{
+		MessageBox(L"Log out successfully", L"Notice", MB_OK);
+		CKeyboardLockDlg::isRightPass = false;
+	}
 }

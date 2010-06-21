@@ -45,4 +45,7 @@ public:
 	afx_msg void OnBnClickedButton7();
 	CTabCtrl MyTabControl;
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
+
+public:
+	void EnableTab(int nSel, bool isEnable);
 };
