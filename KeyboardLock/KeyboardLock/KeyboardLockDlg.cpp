@@ -74,6 +74,7 @@ BEGIN_MESSAGE_MAP(CKeyboardLockDlg, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON8, &CKeyboardLockDlg::OnBnClickedButton8)
 	ON_BN_CLICKED(IDC_BUTTON7, &CKeyboardLockDlg::OnBnClickedButton7)
 	ON_NOTIFY(TCN_SELCHANGE, IDC_TAB1, &CKeyboardLockDlg::OnTcnSelchangeTab1)
+	ON_WM_HOTKEY()
 END_MESSAGE_MAP()
 
 
@@ -139,6 +140,9 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 	int nSel = MyTabControl.GetCurSel();
 
 	EnableTab(nSel, TRUE);
+
+	UnregisterHotKey(m_hWnd, 100);
+	RegisterHotKey(m_hWnd, 100, MOD_CONTROL|MOD_SHIFT|MOD_ALT, 0x42);
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
@@ -258,4 +262,19 @@ void CKeyboardLockDlg::EnableTab(int nSel, bool isEnable)
 	else
 		tab[nSel]->ShowWindow(SW_HIDE);
 
+}
+
+void CKeyboardLockDlg::OnHotKey(UINT nHotKeyId, UINT nKey1, UINT nKey2)
+{
+	// TODO: Add your message handler code here and/or call default
+	if (nHotKeyId == 100)
+	{
+		if (isRightPass)
+			isRightPass = !isRightPass;
+		
+		MyTabControl.SetCurSel(0);
+		EnableTab(0, true);
+	}
+
+	CDialog::OnHotKey(nHotKeyId, nKey1, nKey2);
 }

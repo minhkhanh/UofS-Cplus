@@ -68,4 +68,8 @@ public:
 	afx_msg void OnBnClickedSave();
 	static DWORD WINAPI RunThread(void* lpVoid);
 	afx_msg void OnDestroy();
+private:
+	CButton m_btnOpen;
+public:
+	afx_msg void OnBnClickedOpen();
 };

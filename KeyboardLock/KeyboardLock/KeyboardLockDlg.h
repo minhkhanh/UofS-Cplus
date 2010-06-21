@@ -45,6 +45,7 @@ public:
 	afx_msg void OnBnClickedButton7();
 	CTabCtrl MyTabControl;
 	afx_msg void OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnHotKey(UINT nHotKeyId, UINT nKey1, UINT nKey2);
 
 public:
 	void EnableTab(int nSel, bool isEnable);
