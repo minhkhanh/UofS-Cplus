@@ -20,6 +20,7 @@ public:
 // Dialog Data
 	enum { IDD = IDD_KEYBOARDLOCK_DIALOG };
 	CDialog *tab[4];
+	int i_NumberOfTab;
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support

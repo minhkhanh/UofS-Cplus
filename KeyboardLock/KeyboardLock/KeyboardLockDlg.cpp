@@ -7,6 +7,7 @@
 #include "KeyboardLockDlg.h"
 #include "dllLink.h"
 #include "Tab_Process_Locker.h"
+#include "Tab_Process_Tracker.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -108,18 +109,24 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 	// TODO: Add extra initialization here
 	//hHookDll = LoadLibrary(_T("HookCore.dll"));
 
-	//Add thêm th? Tab
+	//Add them the Tab
+	i_NumberOfTab = 2;
 	tab[0] = new CTab_Process_Locker;
+	tab[1] = new CTab_Process_Tracker;
 
 	tab[0]->Create(IDD_TAB_PROCESS_LOCKER, GetParent());
+	tab[1]->Create(IDD_TAB_PROCESS_TRACKER, GetParent());
 
 	TCITEM tie;
 	tie.mask = TCIF_TEXT;
 	tie.pszText = L"Process Locker";
-
 	MyTabControl.InsertItem(0, &tie);
 
-	//X? lí giao di?n t?ng Tab
+	tie.mask = TCIF_TEXT;
+	tie.pszText = L"Tracker";
+	MyTabControl.InsertItem(1, &tie);
+
+	//Xu li giao dien tung Tab
 	CRect l_RectClient;
 	CRect l_RectWnd;
 
@@ -131,7 +138,7 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 	ScreenToClient(l_RectWnd);
 	l_RectClient.OffsetRect(l_RectWnd.left, l_RectWnd.top);
 
-	for (int i=0; i<1; i++)
+	for (int i=0; i<i_NumberOfTab; i++)
 		tab[i]->SetWindowPos(&wndTop, l_RectClient.left, l_RectClient.top, l_RectClient.Width(), l_RectClient.Height(), SWP_HIDEWINDOW);
 
 	tab[nSel]->ShowWindow(SW_SHOW);
@@ -223,6 +230,20 @@ void CKeyboardLockDlg::OnTcnSelchangeTab1(NMHDR *pNMHDR, LRESULT *pResult)
 	// TODO: Add your control notification handler code here
 	*pResult = 0;
 
-	//X? lí giao di?n t?ng th? Tab
+	//Xu li giao dien tung Tab
+	CRect l_RectClient;
+	CRect l_RectWnd;
 
+	int nSel = MyTabControl.GetCurSel();
+
+	MyTabControl.GetClientRect(l_RectClient);
+	MyTabControl.AdjustRect(FALSE, l_RectClient);
+	MyTabControl.GetWindowRect(l_RectWnd);
+	ScreenToClient(l_RectWnd);
+	l_RectClient.OffsetRect(l_RectWnd.left, l_RectWnd.top);
+
+	for (int i=0; i<i_NumberOfTab; i++)
+		tab[i]->SetWindowPos(&wndTop, l_RectClient.left, l_RectClient.top, l_RectClient.Width(), l_RectClient.Height(), SWP_HIDEWINDOW);
+
+	tab[nSel]->ShowWindow(SW_SHOW);
 }
