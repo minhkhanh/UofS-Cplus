@@ -1,6 +1,5 @@
 LIBRARY	"HookCore"
 EXPORTS
    LockKeyboard
-   LockCtrlAltDel
    LockTaskManager
    LockMouse

