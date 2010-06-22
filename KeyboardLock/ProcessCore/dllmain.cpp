@@ -82,6 +82,7 @@ void EXPORT MonitorProcess(BOOL b)
 		{
 			return;
 		}
+
 		hMonitorProcessThread = CreateThread(NULL,0,DenyProcessThread,NULL,0,NULL);
 		bStopMonitorProcessThread = false;
 	} 

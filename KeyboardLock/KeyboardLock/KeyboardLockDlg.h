@@ -49,4 +49,7 @@ public:
 
 public:
 	void EnableTab(int nSel, bool isEnable);
+
+private:
+	bool m_bIsEnabled;
 };

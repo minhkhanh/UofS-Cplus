@@ -148,6 +148,8 @@ BOOL CKeyboardLockDlg::OnInitDialog()
 	UnregisterHotKey(m_hWnd, 100);
 	RegisterHotKey(m_hWnd, 100, MOD_CONTROL|MOD_SHIFT|MOD_ALT, 0x42);
 
+	m_bIsEnabled = true;
+
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
@@ -275,6 +277,13 @@ void CKeyboardLockDlg::OnHotKey(UINT nHotKeyId, UINT nKey1, UINT nKey2)
 	{
 		if (isRightPass)
 			isRightPass = !isRightPass;
+
+		if (m_bIsEnabled)
+			ShowWindow(SW_HIDE);
+		else
+			ShowWindow(SW_SHOW);
+
+		m_bIsEnabled = !m_bIsEnabled;
 		
 		MyTabControl.SetCurSel(0);
 		EnableTab(0, true);
